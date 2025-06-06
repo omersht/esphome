@@ -2,6 +2,7 @@
 
 #include <cinttypes>
 #include <map>
+#include <unordered_set>
 
 #include "esphome/core/automation.h"
 #include "esphome/core/component.h"
@@ -125,6 +126,7 @@ class TemplateAlarmControlPanel : public alarm_control_panel::AlarmControlPanel,
   std::map<binary_sensor::BinarySensor *, SensorInfo> sensor_map_;
   // a list of automatically bypassed sensors
   std::set<uint8_t> bypassed_sensor_indicies_;
+  std::unordered_set<binary_sensor::BinarySensor*> bypassed_sensors_;
 #endif
   TemplateAlarmControlPanelRestoreMode restore_mode_{};
 
