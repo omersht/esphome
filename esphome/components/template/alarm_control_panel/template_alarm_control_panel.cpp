@@ -148,7 +148,9 @@ void TemplateAlarmControlPanel::loop() {
     // Check for triggered sensors
     if (sensor_info.first->state) {  // Sensor triggered?
       // Skip if auto bypassed
-      if (true) {
+      if (std::find(this->bypassed_sensor_indicies_.begin(),
+              this->bypassed_sensor_indicies_.end(),
+              sensor_info.second.store_index) != this->bypassed_sensor_indicies_.end()) {
         continue;
       }
       // Skip if bypass armed home
