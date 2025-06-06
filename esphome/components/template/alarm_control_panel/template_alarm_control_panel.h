@@ -123,7 +123,7 @@ class TemplateAlarmControlPanel : public alarm_control_panel::AlarmControlPanel,
   // This maps a binary sensor to its type and attribute bits
   std::map<binary_sensor::BinarySensor *, SensorInfo> sensor_map_;
   // a list of automatically bypassed sensors
-  std::vector<uint8_t> bypassed_sensor_indicies_;
+  std::set<uint8_t> bypassed_sensor_indicies_;
 #endif
   TemplateAlarmControlPanelRestoreMode restore_mode_{};
 
