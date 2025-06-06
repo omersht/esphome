@@ -107,7 +107,7 @@ void TemplateAlarmControlPanel::loop() {
         // Check for sensors left on and set to bypass automatically and remove them from monitoring
         if ((sensor_info.second.flags & BINARY_SENSOR_MODE_BYPASS_AUTO) && (sensor_info.first->state)) {
           ESP_LOGW(TAG, "%s is left on and will be automatically bypassed", sensor_info.first->get_name().c_str());
-          this->bypassed_sensor_indicies_.push_back(sensor_info.second.store_index);
+          this->bypassed_sensor_indicies_.insert(sensor_info.second.store_index);
         }
       }
 #endif
@@ -148,9 +148,7 @@ void TemplateAlarmControlPanel::loop() {
     // Check for triggered sensors
     if (sensor_info.first->state) {  // Sensor triggered?
       // Skip if auto bypassed
-      if (std::find(this->bypassed_sensor_indicies_.begin(),
-              this->bypassed_sensor_indicies_.end(),
-              sensor_info.second.store_index) != this->bypassed_sensor_indicies_.end()) {
+      if (this->bypassed_sensor_indicies_.count(sensor_info.second.store_index) > 0) {
         continue;
       }
       // Skip if bypass armed home
