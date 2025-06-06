@@ -112,6 +112,7 @@ void TemplateAlarmControlPanel::loop() {
       }
 #endif
       this->publish_state(this->desired_state_);
+      return;
     }
     return;
   }
